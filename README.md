@@ -1,5 +1,7 @@
 # primeiro_projeto_flutter
 
+![gerenciador_tarefas](https://user-images.githubusercontent.com/67009679/210006567-9375339a-bbc8-4ba3-9467-c3fcfd8ad695.gif)
+
 ## Primeiro projeto em Flutter
 
 O presente projeto consiste em um organizador pessoal de tarefas, onde cada uma das atividades
