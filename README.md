@@ -2,7 +2,7 @@
 
 ## Primeiro projeto em Flutter
 
-![gerenciador_tarefas](https://user-images.githubusercontent.com/67009679/210006567-9375339a-bbc8-4ba3-9467-c3fcfd8ad695.gif)
+![gerenciador_taref](https://user-images.githubusercontent.com/67009679/210007429-969ac7db-1fc9-4cdb-82a9-19054ee6df30.gif)
 
 O presente projeto consiste em um organizador pessoal de tarefas, onde cada uma das atividades
 adicionada tem seus parâmetros de dificuldade e nível. Conforme o usuário sobe de nível ele pode
