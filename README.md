@@ -1,6 +1,6 @@
 # primeiro_projeto_flutter
 
-## Primeiro projeto em flutter
+## Primeiro projeto em Flutter
 
 O presente projeto consiste em um organizador pessoal de tarefas, onde cada uma das atividades
 adicionada tem seus parâmetros de dificuldade e nível. Conforme o usuário sobe de nível ele pode
