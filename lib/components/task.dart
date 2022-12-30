@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:primeiro_projeto_flutter/components/difficulty.dart';
 
 class Tasks extends StatefulWidget {
-  final String nome;
-  final String foto;
-  final int dificuldade;
+  final String name;
+  final String photo;
+  final int difficulty;
 
-  const Tasks(this.nome, this.foto, this.dificuldade, {Key? key})
+
+
+  const Tasks(this.name, this.photo, this.difficulty, {Key? key})
       : super(key: key);
 
 //
@@ -16,12 +18,30 @@ class Tasks extends StatefulWidget {
 
 class _TasksState extends State<Tasks> {
   int level = 1;
+  int dificCounter = 0;
 
   void levelUp(){
     setState((){
       level++;
+      if(((level/widget.difficulty)/10)>=1){
+        dificCounter++;
+        level = 0;
+      }
     });
   }
+
+  Color colorSet() {
+    if (dificCounter == 1) {
+      return const Color.fromARGB(255, 152, 108, 229);
+    } else if (dificCounter == 2) {
+      return const Color.fromARGB(255, 79, 17, 93);
+    } else if (dificCounter >= 3) {
+      return const Color.fromARGB(255, 77, 76, 84);
+    } else {
+      return Colors.blue;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +52,7 @@ class _TasksState extends State<Tasks> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: Colors.blue,
+              color: colorSet(),
             ),
             height: 140,
           ),
@@ -59,7 +79,7 @@ class _TasksState extends State<Tasks> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
                         child: Image.asset(
-                          widget.foto,
+                          widget.photo,
                           height: 100,
                           width: 72,
                           fit: BoxFit.cover,
@@ -73,12 +93,12 @@ class _TasksState extends State<Tasks> {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            widget.nome,
+                            widget.name,
                             style: const TextStyle(
-                                fontSize: 15, overflow: TextOverflow.ellipsis),
+                                fontSize: 16, overflow: TextOverflow.ellipsis),
                           ),
                         ),
-                        Difficulty(difficultyLevel: widget.dificuldade,),
+                        Difficulty(difficultyLevel: widget.difficulty,),
                       ],
                     ),
                     Padding(
@@ -116,8 +136,8 @@ class _TasksState extends State<Tasks> {
                       width: 200,
                       child: LinearProgressIndicator(
                         color: Colors.white,
-                        value: (widget.dificuldade > 0)
-                            ? ((level/widget.dificuldade) / 10)
+                        value: (widget.difficulty > 0)
+                            ? ((level/widget.difficulty) / 10)
                             : 1,
                       ),
                     ),
@@ -131,6 +151,8 @@ class _TasksState extends State<Tasks> {
                   ),
                 ],
               )
+                 // : const Text ('Proeficiente!', style: TextStyle(color:Colors.white)),
+
             ],
           ),
         ],

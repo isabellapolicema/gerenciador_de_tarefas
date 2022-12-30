@@ -1,5 +1,7 @@
 # primeiro_projeto_flutter
 
+assets/images/gerenciador_de_tarefas.gif
+
 ## Primeiro projeto em Flutter
 
 ![gerenciador_taref](https://user-images.githubusercontent.com/67009679/210007429-969ac7db-1fc9-4cdb-82a9-19054ee6df30.gif)
