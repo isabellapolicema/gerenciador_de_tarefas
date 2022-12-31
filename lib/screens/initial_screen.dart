@@ -10,7 +10,6 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,23 +17,18 @@ class _InitialScreenState extends State<InitialScreen> {
         title: const Text('Tarefas'),
         leading: const Icon(Icons.add_task),
       ),
-      body: Container(
-        color: const Color.fromARGB(255, 208, 221, 237),
-        child: ListView(
-          children: TaskInherited.of(context).taskList,
-        ),
-        floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => FormScreen(),
-              ),
+      body: ListView(
+        padding: const EdgeInsets.only(top: 8, bottom: 70),
+        children: TaskInherited.of(context).taskList,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (contextNew) => FormScreen(taskContext: context,),
+          ),
           );
         },
-        backgroundColor: Colors.blue[100],
         child: const Icon(Icons.add),
-      ),),
+      ),
     );
   }
 }

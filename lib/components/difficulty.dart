@@ -12,7 +12,7 @@ class Difficulty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 10,),
+        const SizedBox(width: 10,),
         Icon(
           Icons.star,
           size: 15,

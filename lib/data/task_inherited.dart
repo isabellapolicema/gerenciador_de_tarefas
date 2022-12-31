@@ -7,11 +7,11 @@ class TaskInherited extends InheritedWidget {
     required Widget child,
   }) : super(key: key, child: child);
 
-  final List<Tasks> taskList =[Tasks('   Flutter', 'assets/images/flutter.png', 3),
-    Tasks('   React Native', 'assets/images/react.jpg', 3),
-    Tasks('   Python', 'assets/images/python.jpg', 3),
-    Tasks('   Git/GitHub', 'assets/images/git.jpg', 1),
-    Tasks('   Figma','assets/images/figma.jpg',1,),];
+  final List<Tasks> taskList =[Tasks('Flutter', 'assets/images/flutter.png', 3),
+    Tasks('React Native', 'assets/images/react.jpg', 3),
+    Tasks('Python', 'assets/images/python.jpg', 3),
+    Tasks('GitHub', 'assets/images/git.jpg', 1),
+    Tasks('Figma','assets/images/figma.jpg',1,),];
 
   void newTask(String name, String photo, int difficulty){
     taskList.add(Tasks(name, photo, difficulty));

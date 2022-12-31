@@ -6,26 +6,31 @@ class Tasks extends StatefulWidget {
   final String photo;
   final int difficulty;
 
-
-
-  const Tasks(this.name, this.photo, this.difficulty, {Key? key})
+  Tasks(this.name, this.photo, this.difficulty, {Key? key})
       : super(key: key);
-
+  int level = 0;
 //
   @override
   State<Tasks> createState() => _TasksState();
 }
 
 class _TasksState extends State<Tasks> {
-  int level = 1;
+
   int dificCounter = 0;
 
-  void levelUp(){
-    setState((){
-      level++;
-      if(((level/widget.difficulty)/10)>=1){
+  bool assetOrNetwork() {
+    if (widget.photo.contains('http')) {
+      return false;
+    }
+    return true;
+  }
+
+  void levelUp() {
+    setState(() {
+      widget.level++;
+      if (((widget.level / widget.difficulty) / 10) >= 1) {
         dificCounter++;
-        level = 0;
+        widget.level = 0;
       }
     });
   }
@@ -41,7 +46,6 @@ class _TasksState extends State<Tasks> {
       return Colors.blue;
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,23 +71,30 @@ class _TasksState extends State<Tasks> {
                 height: 100,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.black12,
                       ),
-                      // width: 72,
-                      // height: 100,
+                       width: 72,
+                       height: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: Image.asset(
-                          widget.photo,
-                          height: 100,
-                          width: 72,
-                          fit: BoxFit.cover,
-                        ),
+                        child: assetOrNetwork()
+                            ? Image.asset(
+                                widget.photo,
+                                // height: 100,
+                                // width: 72,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                widget.photo,
+                                // height: 100,
+                                // width: 72,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     Column(
@@ -92,13 +103,14 @@ class _TasksState extends State<Tasks> {
                       children: [
                         SizedBox(
                           width: 200,
-                          child: Text(
-                            widget.name,
+                          child: Text('  ${widget.name}',
                             style: const TextStyle(
-                                fontSize: 16, overflow: TextOverflow.ellipsis),
+                                fontSize: 18, overflow: TextOverflow.ellipsis),
                           ),
                         ),
-                        Difficulty(difficultyLevel: widget.difficulty,),
+                        Difficulty(
+                          difficultyLevel: widget.difficulty,
+                        ),
                       ],
                     ),
                     Padding(
@@ -107,10 +119,14 @@ class _TasksState extends State<Tasks> {
                         height: 52,
                         width: 62,
                         child: ElevatedButton(
-                          onPressed: levelUp,
+                          onPressed: (){
+                            setState((){
+                              widget.level++;
+                            });
+                          },
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: const [
                               Icon(Icons.arrow_drop_up),
                               Text(
@@ -129,15 +145,13 @@ class _TasksState extends State<Tasks> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                    ),
+                    padding: const EdgeInsets.all(8),
                     child: SizedBox(
                       width: 200,
                       child: LinearProgressIndicator(
                         color: Colors.white,
                         value: (widget.difficulty > 0)
-                            ? ((level/widget.difficulty) / 10)
+                            ? ((widget.level / widget.difficulty) / 10)
                             : 1,
                       ),
                     ),
@@ -145,14 +159,13 @@ class _TasksState extends State<Tasks> {
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Nível: $level',
+                      'Nível: ${widget.level}',
                       style: const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ],
               )
-                 // : const Text ('Proeficiente!', style: TextStyle(color:Colors.white)),
-
+              // : const Text ('Proeficiente!', style: TextStyle(color:Colors.white)),
             ],
           ),
         ],
