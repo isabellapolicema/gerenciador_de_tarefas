@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:primeiro_projeto_flutter/data/task_inherited.dart';
+import 'package:primeiro_projeto_flutter/components/task.dart';
+import 'package:primeiro_projeto_flutter/data/task_dao.dart';
+
 
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key, required this.taskContext}) : super(key: key);
@@ -49,7 +51,7 @@ class _FormScreenState extends State<FormScreen> {
               decoration: BoxDecoration(
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(width: 2),
+                border: Border.all(width: 3),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,7 +62,7 @@ class _FormScreenState extends State<FormScreen> {
                     child: TextFormField(
                       validator: (String? value) {
                         if (valueValidator(value)) {
-                          return 'Insira o nome da tarefa.';
+                          return 'Insira o nome da tarefa';
                         }
                         return null;
                       },
@@ -80,7 +82,7 @@ class _FormScreenState extends State<FormScreen> {
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (difficultyValidator(value)) {
-                          return 'Insira uma dificuldade entre 1 e 5.';
+                          return 'Insira uma dificuldade entre 1 e 5';
                         }
                         return null;
                       },
@@ -103,7 +105,7 @@ class _FormScreenState extends State<FormScreen> {
                       keyboardType: TextInputType.url,
                       validator: (value) {
                         if (valueValidator(value)) {
-                          return 'Insira um URL de imagem.';
+                          return 'Insira um URL de imagem';
                         }
                         return null;
                       },
@@ -143,13 +145,13 @@ class _FormScreenState extends State<FormScreen> {
                         // print(nameController.text);
                         // print(int.parse(difficultyController.text));
                         // print(imageController.text);
-                        TaskInherited.of(widget.taskContext).newTask(
+                        TaskDao().save(Tasks(
                             nameController.text,
                             imageController.text,
-                            int.parse(difficultyController.text));
+                            int.parse(difficultyController.text)));
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Adicionando uma nova tarefa.'),
+                            content: Text('Adicionando uma nova tarefa'),
                           ),
                         );
                         Navigator.pop(context);

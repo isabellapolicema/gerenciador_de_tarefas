@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:primeiro_projeto_flutter/components/difficulty.dart';
+import 'package:primeiro_projeto_flutter/data/task_dao.dart';
 
 class Tasks extends StatefulWidget {
   final String name;
@@ -16,35 +17,11 @@ class Tasks extends StatefulWidget {
 
 class _TasksState extends State<Tasks> {
 
-  int dificCounter = 0;
-
   bool assetOrNetwork() {
     if (widget.photo.contains('http')) {
       return false;
     }
     return true;
-  }
-
-  void levelUp() {
-    setState(() {
-      widget.level++;
-      if (((widget.level / widget.difficulty) / 10) >= 1) {
-        dificCounter++;
-        widget.level = 0;
-      }
-    });
-  }
-
-  Color colorSet() {
-    if (dificCounter == 1) {
-      return const Color.fromARGB(255, 152, 108, 229);
-    } else if (dificCounter == 2) {
-      return const Color.fromARGB(255, 79, 17, 93);
-    } else if (dificCounter >= 3) {
-      return const Color.fromARGB(255, 77, 76, 84);
-    } else {
-      return Colors.blue;
-    }
   }
 
   @override
@@ -56,7 +33,7 @@ class _TasksState extends State<Tasks> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: colorSet(),
+              color: Colors.blue,
             ),
             height: 140,
           ),
@@ -119,6 +96,9 @@ class _TasksState extends State<Tasks> {
                         height: 52,
                         width: 62,
                         child: ElevatedButton(
+                          onLongPress: (){
+                            TaskDao().delete(widget.name);
+                          },
                           onPressed: (){
                             setState((){
                               widget.level++;

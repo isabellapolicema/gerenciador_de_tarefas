@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Difficulty extends StatelessWidget {
+
   final int difficultyLevel;
 
   const Difficulty({
@@ -12,7 +13,7 @@ class Difficulty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const SizedBox(width: 10,),
+         const SizedBox(width: 10,),
         Icon(
           Icons.star,
           size: 15,
